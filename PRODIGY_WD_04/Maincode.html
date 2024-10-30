@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gowtham Raj T</title>
+    <style>
+        /* Body styles */
+        body {
+            margin: 0;
+            font-family: 'Times New Roman', Times, serif;
+            color: #ffffff;
+            background-image: url('bg img.png');
+            background-size: cover;
+            background-position: center;
+            scroll-behavior: smooth;
+        }
+
+        /* Adjusted hamburger button background to the right */
+        .menu-btn-background {
+            position: absolute;
+            top: 20px;
+            right: 15px;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+        .menu-btn {
+            cursor: pointer;
+            transition: transform 0.9s ease;
+        }
+        .menu-btn div {
+            width: 25px;
+            height: 3px;
+            background-color: #ffffff;
+            margin: 4px 0;
+            border-radius: 5px;
+        }
+
+        /* Sliding screen */
+        .menu-content {
+            position: fixed;
+            top: 5%;
+            bottom: 10%;
+            left: -25%;
+            height: 80%;
+            width: 25%;
+            background-image: url('slidescreen img.png');
+            background-size: cover;
+            background-position: center;
+            padding: 20px;
+            transition: left 1.5s ease;
+            border-radius: 20px;
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+
+
+ /* New wrapper for content */
+        .content-wrapper {
+            overflow: hidden;
+            flex-grow: 1;
+            line-height: 1.5;
+        }
+
+        .profile-img img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            background-color: #ffffff;
+            margin: 0 auto 10px auto;
+        }
+
+        .profile-info {
+            display: table;
+            margin: 0 auto;
+            text-align: left;
+            word-wrap: break-word;
+        }
+
+        .profile-info p {
+            display: table-row;
+        }
+
+        .profile-info p span {
+            display: table-cell;
+            padding: 5px 10px;
+        }
+
+        .social-links {
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .social-links a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+
+        .social-links a:hover {
+            color: #0000ff;
+        }
+
+        .menu-active .menu-content {
+            left: 0;
+        }
+
+        .menu-active .menu-btn-background {
+            right: 10px;
+        }
+
+
+        /* Carousel styles */
+        .carousel-container {
+            width: 80%;
+            max-width: 350px;
+            height: 250px;
+            margin: 50px auto;
+            perspective: 1000px;
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .carousel {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            display: flex;
+            transition: transform 1.0s ease;
+        }
+        
+        .carousel div {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            transition: opacity 1.0s ease; 
+        }
+
+        .carousel div img {
+            width: auto;
+            height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .carousel div:nth-child(1) { transform: rotateY(0deg) translateZ(150px); opacity: 1; }
+        .carousel div:nth-child(2) { transform: rotateY(45deg) translateZ(140px); }
+        .carousel div:nth-child(3) { transform: rotateY(90deg) translateZ(140px); }
+        .carousel div:nth-child(4) { transform: rotateY(135deg) translateZ(140px); }
+        .carousel div:nth-child(5) { transform: rotateY(180deg) translateZ(140px); }
+        .carousel div:nth-child(6) { transform: rotateY(225deg) translateZ(140px); }
+        .carousel div:nth-child(7) { transform: rotateY(270deg) translateZ(140px); }
+        .carousel div:nth-child(8) { transform: rotateY(315deg) translateZ(140px); }
+
+        /* New title outside carousel */
+        .carousel-title {
+            text-align: center;
+            font-size: 16px;
+            color: #ffffff;
+            margin-top: 10px;
+        }
+
+        /* Button styles */
+        .carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 10px 20px;
+    font-size: 18px;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.5); /* Light opacity black background */
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* Smooth background transition */
+}
+
+        .carousel-button.left { left: -70px; }
+        .carousel-button.right { right: -70px; }
+
+        .carousel-button:hover {
+    background-color: rgba(0, 0, 0, 0.7); /* Darker on hover */
+}
+
+.profile-skills {
+            display: flex;
+            justify-content: space-between;
+            margin: 50px auto;
+            width: 80%;
+            max-width: 800px;
+        }
+        .profile-synopsis {
+            flex: 1;
+            margin-right: 20px;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5); /* Background for contrast */
+            border-radius: 10px;
+        }
+        .skills {
+            flex: 1;
+            margin-left: 20px;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5); /* Background for contrast */
+            border-radius: 10px;
+        }
+        
+        .vertical-line {
+            width: 2px;
+            background-color: #ffffff; /* Color of the vertical line */
+            margin: 0 10px;
+        }
+
+  /* Responsive Design */
+        @media (max-width: 768px) {
+            .carousel-container {
+                width: 90%; /* More width on smaller screens */
+                height: 200px; /* Adjust height for smaller screens */
+            }
+            .carousel-title {
+                font-size: 14px; /* Smaller font size */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .profile-info {
+                font-size: 14px; /* Smaller font size for profile info */
+            }
+
+            .social-links a {
+                font-size: 12px; /* Smaller font size for links */
+            }
+        }
+        
+    </style>
+</head>
+<body>
+   <center><h1 class="title">GOWTHAM RAJ T</h1></center><hr>
+    <div class="menu-content">
+        <div class="menu-btn-background">
+            <div class="menu-btn" onclick="toggleMenu()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        <center>
+            <div class="profile-img">
+                <img src="passport.jpg" alt="Passport Image">
+            </div>
+            <h3>PROFILE</h3>
+            <div class="content-wrapper">
+                <div class="profile-info">
+                    <p><span>Name:</span><span>Gowtham Raj T</span></p>
+                    <p><span>D.O.B:</span><span>21 November 2005</span></p>
+                    <p><span>Email:</span><span>gowthamraj211105@gmail.com</span></p>
+                </div>
+            </div>
+        </center>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/gowtham-raj-t-354a4328b/" target="_blank">LinkedIn</a> |
+            <a href="https://wa.me/9543847774" target="_blank">WhatsApp</a> |
+            <a href="https://www.instagram.com/gow_tham_raj21/" target="_blank">Instagram</a> |
+            <a href="mailto:gowthamraj211105@gmail.com">Email</a>
+        </div>
+    </div>
+
+    <!-- Carousel for Certificates -->
+    <div class="carousel-container">
+        <button class="carousel-button left" onclick="rotateCarousel('left')"><</button>
+        <div class="carousel">
+            <div><img src="Coursera- AI for Everyone.jpg" alt="Coursera- AI for Everyone"></div>
+            <div><img src="Coursera- Introduction to Front-End Development.jpg" alt="Coursera- Introduction to Front-End Development"></div>
+            <div><img src="Infosys- Basics of Python.jpg" alt="Infosys- Basics of Python"></div>
+            <div><img src="Coursera- Version Control.jpg" alt="Coursera- Version Control"></div>
+            <div><img src="Design Thinking - A Primer.jpg" alt="Design Thinking - A Primer"></div>
+            <div><img src="Sensathon Certificate 2024.jpg" alt="Sensathon Certificate 2024"></div>
+            <div><img src="National Level Srinivasa Ramanujam Mathematical Competitions 2024.jpg" alt="National Level Srinivasa Ramanujam Mathematical Competitions 2024"></div>
+            <div><img src="INTEL ONEAPI Machine Learning Workshop.jpg" alt="INTEL ONEAPI Machine Learning Workshop"></div>
+        </div>
+        <button class="carousel-button right" onclick="rotateCarousel('right')">></button>
+    </div>
+
+    <!-- Title below the carousel -->
+    <div id="carousel-title" class="carousel-title">Coursera- AI for Everyone</div>
+
+    <div class="profile-skills">
+        <div class="profile-synopsis">
+            <h3>Profile Synopsis</h3>
+            <p>Enthusiastic and dedicated second-year student with a foundational understanding of Python and C, complemented by strong skills in front-end development. Proficient in HTML, CSS, and JavaScript, with hands-on experience in creating responsive web applications. Eager to enhance my programming skills while applying my front-end expertise in real-world projects. Seeking opportunities to contribute to innovative teams and expand my knowledge in software development and design.</p>
+        </div>
+        <div class="vertical-line"></div>
+        <div class="skills">
+            <h3>Skills</h3>
+            <div class="skill-list">
+            <ul>
+                <li>JavaScript</li>
+                <li>HTML & CSS</li>
+                <li>Basics of Python</li>
+                <li>Basics of C</li>
+                <li>Responsive Design</li>
+                <li>Version Control (Git)</li>
+            </ul>
+        </div>
+        </div>
+    </div>
+
+
+    <script>
+        let currentIndex = 0;
+        const titles = [
+            'Coursera- AI for Everyone',
+            'Coursera- Introduction to Front-End Development',
+            'Infosys- Basics of Python',
+            'Coursera- Version Control',
+            'Design Thinking - A Primer',
+            'Sensathon Certificate 2024',
+            'National Level Srinivasa Ramanujam Mathematical Competitions 2024',
+            'INTEL ONEAPI Machine Learning Workshop'
+        ];
+
+        function rotateCarousel(direction) {
+            const items = document.querySelectorAll('.carousel div');
+            const totalItems = items.length;
+            const angleStep = 360 / totalItems;
+
+            // Update currentIndex with looping
+            if (direction === 'right') {
+                currentIndex = (currentIndex + 1) % totalItems;
+            } else if (direction === 'left') {
+                currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+            }
+
+            // Rotate the carousel and update opacity
+            items.forEach((item, index) => {
+                item.style.transform = `rotateY(${(index - currentIndex) * angleStep}deg) translateZ(150px)`;
+                item.style.opacity = index === currentIndex ? '1' : '0';
+            });
+
+            // Update title below the carousel
+            document.getElementById('carousel-title').innerText = titles[currentIndex];
+        }
+
+  // Swipe detection (touch and mouse)
+        let startX;
+        const carouselContainer = document.querySelector('.carousel-container');
+
+        carouselContainer.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        });
+
+        carouselContainer.addEventListener('touchend', (e) => {
+            const endX = e.changedTouches[0].clientX;
+            if (startX > endX + 50) {
+                rotateCarousel('right');
+            } else if (startX < endX - 50) {
+                rotateCarousel('left');
+            }
+        });
+
+   // Mouse drag detection
+        carouselContainer.addEventListener('mousedown', (e) => {
+            startX = e.clientX;
+        });
+
+        carouselContainer.addEventListener('mouseup', (e) => {
+            const endX = e.clientX;
+            if (startX > endX + 50) {
+                rotateCarousel('right');
+            } else if (startX < endX - 50) {
+                rotateCarousel('left');
+            }
+        });
+ // Arrow key detection
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                rotateCarousel('right');
+            } else if (e.key === 'ArrowLeft') {
+                rotateCarousel('left');
+            }
+        });
+
+ // Menu toggle
+        function toggleMenu() {
+            document.body.classList.toggle('menu-active');
+        }
+    </script>
+</body>
+</html>
